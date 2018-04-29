@@ -1,0 +1,16 @@
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: false
+      env:
+        - MINIKUBE_MEMORY=7777
+
+language: bash
+
+
+before_install:
+# install nsenter which is required for port forwarding
+
+script:
+  - echo 'Add tests here'
