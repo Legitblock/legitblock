@@ -2,22 +2,9 @@ matrix:
   include:
     - os: linux
       dist: trusty
-      sudo: required
-      services:
-      - docker
-      cache:
-        directories:
-        - $HOME/.minikube
-        - $HOME/.kube
-        - $HOME/.local/bin
-        - .git
-        - /usr/local
+      sudo: false
       env:
         - MINIKUBE_MEMORY=7777
-        - MINIKUBE_CPU=4
-        - MINIKUBE_DRIVER=none
-        - HELM_INSTALL_DIR=$HOME/.local/bin
-        - NVM_DIR="$HOME/.nvm"
 
 language: bash
 
