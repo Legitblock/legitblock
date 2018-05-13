@@ -1,7 +1,18 @@
 #  LegitBlock
 
-LegitBlock is a method for an organization to utilize the blockchain for
-administrative  organizational tasks.
+LegitBlock is a method for an organization to utilize the blockchain
+with git for administrative  organizational tasks.
+
+### Blockchain + Git
+
+We provide value by introducing git as a part of the tool set with the
+blockchain component...
+
+Leg(islation,al)-Git-aBChain
+
+This is accomplished by referencing specific commit IDs from git's
+history, in addition signing with gpg keys can be enforced to pprovide
+yet another layer of verification.
 
 ### Layers of Inclusion
 
