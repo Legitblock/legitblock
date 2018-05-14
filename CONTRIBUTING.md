@@ -7,7 +7,7 @@ agree to abide by the legitblock [code of conduct].
 
 Fork, then clone the repo:
 
-    git clone git@github.com:your-username/factory_bot_rails.git
+    git clone git@github.com:your-username/LegitBlock/legitblock.git
 
 Push to your fork and [submit a pull request][pr].
 
