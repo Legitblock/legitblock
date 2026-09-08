@@ -1,6 +1,11 @@
 {
   "/page": "app/page.js",
   "/why-blockchain/page": "app/why-blockchain/page.js",
+  "/core-library/page": "app/core-library/page.js",
+  "/architecture/page": "app/architecture/page.js",
+  "/web-app/page": "app/web-app/page.js",
+  "/cli/page": "app/cli/page.js",
   "/templates/page": "app/templates/page.js",
+  "/api-reference/page": "app/api-reference/page.js",
   "/playground/page": "app/playground/page.js"
 }

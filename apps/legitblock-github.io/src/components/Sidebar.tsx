@@ -3,8 +3,100 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAVIGATION_SECTIONS } from "../lib/navigation";
 import { Sparkles, ArrowRight } from "lucide-react";
+
+export interface NavItem {
+  title: string;
+  href: string;
+  description?: string;
+  badge?: string;
+}
+
+export interface NavSection {
+  title: string;
+  items: NavItem[];
+}
+
+export const NAVIGATION_SECTIONS: NavSection[] = [
+  {
+    title: "Overview & Philosophy",
+    items: [
+      {
+        title: "Introduction",
+        href: "/",
+        description: "Overview of LegitBlock institutional governance framework."
+      },
+      {
+        title: "Why Blockchain?",
+        href: "/why-blockchain",
+        description: "Why organizations must store founding documents & voting on-chain.",
+        badge: "Essential"
+      },
+      {
+        title: "Architecture",
+        href: "/architecture",
+        description: "Monorepo design, cryptographic flow, and component boundaries."
+      }
+    ]
+  },
+  {
+    title: "Core Library",
+    items: [
+      {
+        title: "legitblock-utils",
+        href: "/core-library",
+        description: "Core JS library: Blockchain, Documents, VotingEngine, LDAP, Storage."
+      },
+      {
+        title: "Voting & Quorum Rules",
+        href: "/core-library#voting-rules",
+        description: "Simple majority, supermajority, unanimous, and consensus rules."
+      },
+      {
+        title: "Document Diff Engine",
+        href: "/core-library#diff-engine",
+        description: "Structured line-by-line diffs and automated proposal creation."
+      }
+    ]
+  },
+  {
+    title: "Applications",
+    items: [
+      {
+        title: "Next.js Web Application",
+        href: "/web-app",
+        description: "Setup wizard, document manager, voting portal, block explorer."
+      },
+      {
+        title: "Ink Terminal CLI",
+        href: "/cli",
+        description: "Terminal client with $EDITOR integration for command-line governance."
+      },
+      {
+        title: "API Reference",
+        href: "/api-reference",
+        description: "All 17 REST API endpoints with request and response specs."
+      }
+    ]
+  },
+  {
+    title: "Templates & Tools",
+    items: [
+      {
+        title: "Template Encyclopedia (32)",
+        href: "/templates",
+        description: "For-Profit, Non-Profit, and Cooperative legal templates.",
+        badge: "32 Templates"
+      },
+      {
+        title: "Interactive Sandbox",
+        href: "/playground",
+        description: "Simulate mining, voting, and tamper detection in your browser.",
+        badge: "Interactive"
+      }
+    ]
+  }
+];
 
 export function Sidebar() {
   const pathname = usePathname();
