@@ -17,8 +17,8 @@ import {
   Award,
   BookOpen
 } from "lucide-react";
-import { Sidebar } from "@/components/Sidebar";
-import { CodeBlock } from "@/components/CodeBlock";
+import { Sidebar } from "../../components/Sidebar";
+import { CodeBlock } from "../../components/CodeBlock";
 
 export default function WhyBlockchainPage() {
   return (

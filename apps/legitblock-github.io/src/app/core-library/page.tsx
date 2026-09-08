@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Sidebar } from "@/components/Sidebar";
-import { CodeBlock } from "@/components/CodeBlock";
+import { Sidebar } from "../../components/Sidebar";
+import { CodeBlock } from "../../components/CodeBlock";
 import { 
   Cpu, 
   Layers, 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { TEMPLATES_DATA, TemplateItem } from "@/content/templateData";
+import { TEMPLATES_DATA, TemplateItem } from "../content/templateData";
 import { 
   Building2, 
   HeartHandshake, 

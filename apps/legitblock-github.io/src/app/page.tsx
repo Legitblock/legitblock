@@ -20,9 +20,9 @@ import {
   Layers,
   FileDiff
 } from "lucide-react";
-import { InteractiveChainSimulator } from "@/components/InteractiveChainSimulator";
-import { TerminalDemo } from "@/components/TerminalDemo";
-import { CodeBlock } from "@/components/CodeBlock";
+import { InteractiveChainSimulator } from "../components/InteractiveChainSimulator";
+import { TerminalDemo } from "../components/TerminalDemo";
+import { CodeBlock } from "../components/CodeBlock";
 
 export default function HomePage() {
   return (

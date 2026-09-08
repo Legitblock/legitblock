@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Sidebar } from "@/components/Sidebar";
-import { TemplateCatalog } from "@/components/TemplateCatalog";
+import { Sidebar } from "../../components/Sidebar";
+import { TemplateCatalog } from "../../components/TemplateCatalog";
 import { 
   Building2, 
   HeartHandshake, 

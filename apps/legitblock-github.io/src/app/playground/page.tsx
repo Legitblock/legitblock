@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Sidebar } from "@/components/Sidebar";
-import { InteractiveChainSimulator } from "@/components/InteractiveChainSimulator";
+import { Sidebar } from "../../components/Sidebar";
+import { InteractiveChainSimulator } from "../../components/InteractiveChainSimulator";
 import { 
   PlayCircle, 
   Sparkles, 

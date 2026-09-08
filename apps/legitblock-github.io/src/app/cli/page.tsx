@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { Sidebar } from "@/components/Sidebar";
-import { CodeBlock } from "@/components/CodeBlock";
-import { TerminalDemo } from "@/components/TerminalDemo";
+import { Sidebar } from "../../components/Sidebar";
+import { CodeBlock } from "../../components/CodeBlock";
+import { TerminalDemo } from "../../components/TerminalDemo";
 import { 
   Terminal, 
   FileEdit, 

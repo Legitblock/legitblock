@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAVIGATION_SECTIONS } from "@/lib/navigation";
+import { NAVIGATION_SECTIONS } from "../lib/navigation";
 import { Sparkles, ArrowRight } from "lucide-react";
 
 export function Sidebar() {
