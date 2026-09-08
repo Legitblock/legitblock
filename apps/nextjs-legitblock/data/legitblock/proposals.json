@@ -1,0 +1,119 @@
+[
+  {
+    "id": "prop-genesis-founding",
+    "type": "INITIAL_DOCUMENT",
+    "title": "Ratification of Organization Charter and Founding Documents",
+    "description": "Formal ratification of initial organizational documents and governance structure for Democracy Tech Worker Cooperative.",
+    "proposer": {
+      "id": "Alice Walker",
+      "name": "Alice Walker"
+    },
+    "targetDocumentId": null,
+    "targetDocumentTitle": null,
+    "documentData": {
+      "category": "founding",
+      "notes": "Genesis founding ratification vote"
+    },
+    "votingRule": {
+      "type": "SIMPLE_MAJORITY",
+      "name": "Simple Majority (>50%)",
+      "quorumPercentage": 50,
+      "passingThresholdPercentage": 50.01,
+      "description": "Requires more than 50% of cast non-abstaining votes to approve, with at least 50% member quorum."
+    },
+    "votes": {
+      "alice": {
+        "voterId": "alice",
+        "voterName": "Alice Walker",
+        "decision": "APPROVE",
+        "timestamp": "2026-09-08T02:51:05.688Z",
+        "signature": null
+      },
+      "bob": {
+        "voterId": "bob",
+        "voterName": "Bob Chen",
+        "decision": "APPROVE",
+        "timestamp": "2026-09-08T02:51:05.688Z",
+        "signature": null
+      },
+      "carol": {
+        "voterId": "carol",
+        "voterName": "Carol Martinez",
+        "decision": "APPROVE",
+        "timestamp": "2026-09-08T02:51:05.688Z",
+        "signature": null
+      }
+    },
+    "status": "EXECUTED",
+    "tally": {
+      "totalEligible": 3,
+      "total": 3,
+      "approve": 3,
+      "reject": 0,
+      "abstain": 0,
+      "quorumMet": true,
+      "thresholdMet": true,
+      "passed": true,
+      "reason": "Proposal approved with 100.0% votes and 100.0% quorum"
+    },
+    "createdAt": "2026-09-08T02:51:05.688Z",
+    "expiresAt": "2026-09-15T02:51:05.688Z",
+    "executedBlockIndex": 0
+  },
+  {
+    "id": "prop-1788835865719-yfor9",
+    "type": "AMENDMENT",
+    "title": "Amend Articles of Incorporation to add Technological Sovereignty clause",
+    "description": "Proposed amendment drafted via CLI $EDITOR",
+    "proposer": {
+      "id": "alice",
+      "name": "Alice Walker"
+    },
+    "targetDocumentId": "doc-worker-coop-articles",
+    "targetDocumentTitle": "Articles of Incorporation (Worker Cooperative)",
+    "documentData": {
+      "content": "# Articles of Incorporation of Worker Cooperative\n\n## Article I: Democratic Identity\nThe Cooperative is organized as a worker cooperative under applicable cooperative corporation law.\n\n## Article II: Rochdale Cooperative Principles\nThe Cooperative strictly adheres to the International Cooperative Alliance principles:\n1. Voluntary and Open Membership\n2. Democratic Member Control (One Member, One Vote)\n3. Member Economic Participation\n4. Autonomy and Independence\n5. Education, Training, and Information\n6. Cooperation among Cooperatives\n7. Concern for Community\n\n## Article III: Worker Ownership and Equality\nOnly natural persons actively employed by the Cooperative shall be eligible for worker-membership. Each member holds exactly one voting membership share.\n\n\n## Article IV: Technological Sovereignty\nAll organizational source code and digital infrastructure shall be maintained cooperatively on decentralized protocols.",
+      "proposedVersion": "1.1",
+      "diff": "Index: Articles of Incorporation (Worker Cooperative)\n===================================================================\n--- Articles of Incorporation (Worker Cooperative)\tprevious\n+++ Articles of Incorporation (Worker Cooperative)\tproposed\n@@ -14,4 +14,8 @@\n 7. Concern for Community\n \n ## Article III: Worker Ownership and Equality\n Only natural persons actively employed by the Cooperative shall be eligible for worker-membership. Each member holds exactly one voting membership share.\n+\n+\n+## Article IV: Technological Sovereignty\n+All organizational source code and digital infrastructure shall be maintained cooperatively on decentralized protocols.\n\\ No newline at end of file\n",
+      "category": "founding"
+    },
+    "votingRule": {
+      "type": "SIMPLE_MAJORITY",
+      "name": "Simple Majority (>50%)",
+      "quorumPercentage": 50,
+      "passingThresholdPercentage": 50.01,
+      "description": "Requires more than 50% of cast non-abstaining votes to approve, with at least 50% member quorum."
+    },
+    "votes": {
+      "alice": {
+        "voterId": "alice",
+        "voterName": "Alice Walker",
+        "decision": "APPROVE",
+        "timestamp": "2026-09-08T02:51:05.724Z",
+        "signature": null
+      },
+      "bob": {
+        "voterId": "bob",
+        "voterName": "Bob Chen",
+        "decision": "APPROVE",
+        "timestamp": "2026-09-08T02:51:05.736Z",
+        "signature": null
+      }
+    },
+    "status": "EXECUTED",
+    "tally": {
+      "totalEligible": 3,
+      "total": 2,
+      "approve": 2,
+      "reject": 0,
+      "abstain": 0,
+      "quorumMet": true,
+      "thresholdMet": true,
+      "passed": true,
+      "reason": "Proposal approved with 100.0% votes and 66.7% quorum"
+    },
+    "createdAt": "2026-09-08T02:51:05.719Z",
+    "expiresAt": "2026-09-15T02:51:05.719Z",
+    "executedBlockIndex": 4
+  }
+]

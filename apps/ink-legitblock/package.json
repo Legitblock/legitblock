@@ -1,0 +1,24 @@
+{
+  "name": "ink-legitblock",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "legitblock-cli": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "dev": "node src/cli.js"
+  },
+  "dependencies": {
+    "@legitblock/legitblock-utils": "workspace:*",
+    "chalk": "^5.3.0",
+    "ink": "^4.4.1",
+    "ink-select-input": "^5.0.0",
+    "ink-spinner": "^5.0.0",
+    "ink-text-input": "^5.0.1",
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.13"
+  }
+}

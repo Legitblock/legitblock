@@ -1,0 +1,271 @@
+{
+  "organization": {
+    "id": "org-1788835865686",
+    "name": "Democracy Tech Worker Cooperative",
+    "type": "worker_coop",
+    "jurisdiction": "California",
+    "createdAt": "2026-09-08T02:51:05.686Z",
+    "governanceRules": {},
+    "foundingMembers": [
+      {
+        "id": "alice",
+        "name": "Alice Walker",
+        "email": "alice@legitblock.org",
+        "role": "Board President",
+        "votingWeight": 1,
+        "addedAt": "2026-09-08T02:51:05.686Z"
+      },
+      {
+        "id": "bob",
+        "name": "Bob Chen",
+        "email": "bob@legitblock.org",
+        "role": "Secretary",
+        "votingWeight": 1,
+        "addedAt": "2026-09-08T02:51:05.686Z"
+      },
+      {
+        "id": "carol",
+        "name": "Carol Martinez",
+        "email": "carol@legitblock.org",
+        "role": "Treasurer",
+        "votingWeight": 1,
+        "addedAt": "2026-09-08T02:51:05.686Z"
+      }
+    ]
+  },
+  "difficulty": 1,
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": "2026-09-08T02:51:05.686Z",
+      "previousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "type": "GENESIS",
+      "data": {
+        "message": "LegitBlock Genesis: Democracy Tech Worker Cooperative (worker_coop)",
+        "organization": {
+          "id": "org-1788835865686",
+          "name": "Democracy Tech Worker Cooperative",
+          "type": "worker_coop",
+          "jurisdiction": "California",
+          "createdAt": "2026-09-08T02:51:05.686Z",
+          "governanceRules": {},
+          "foundingMembers": [
+            {
+              "id": "alice",
+              "name": "Alice Walker",
+              "email": "alice@legitblock.org",
+              "role": "Board President",
+              "votingWeight": 1,
+              "addedAt": "2026-09-08T02:51:05.686Z"
+            },
+            {
+              "id": "bob",
+              "name": "Bob Chen",
+              "email": "bob@legitblock.org",
+              "role": "Secretary",
+              "votingWeight": 1,
+              "addedAt": "2026-09-08T02:51:05.686Z"
+            },
+            {
+              "id": "carol",
+              "name": "Carol Martinez",
+              "email": "carol@legitblock.org",
+              "role": "Treasurer",
+              "votingWeight": 1,
+              "addedAt": "2026-09-08T02:51:05.686Z"
+            }
+          ]
+        },
+        "foundingMembers": [
+          {
+            "id": "alice",
+            "name": "Alice Walker",
+            "email": "alice@legitblock.org",
+            "role": "Board President",
+            "votingWeight": 1,
+            "addedAt": "2026-09-08T02:51:05.686Z"
+          },
+          {
+            "id": "bob",
+            "name": "Bob Chen",
+            "email": "bob@legitblock.org",
+            "role": "Secretary",
+            "votingWeight": 1,
+            "addedAt": "2026-09-08T02:51:05.686Z"
+          },
+          {
+            "id": "carol",
+            "name": "Carol Martinez",
+            "email": "carol@legitblock.org",
+            "role": "Treasurer",
+            "votingWeight": 1,
+            "addedAt": "2026-09-08T02:51:05.686Z"
+          }
+        ],
+        "initialDocumentsSummary": [
+          {
+            "id": "doc-worker-coop-articles",
+            "title": "Articles of Incorporation (Worker Cooperative)",
+            "category": "founding",
+            "version": "1.0",
+            "hash": "d5051922802522686b937ff11fb59269935ddb78bcb52993c66802cc4dad03f4"
+          },
+          {
+            "id": "doc-worker-coop-bylaws",
+            "title": "Worker-Owner Cooperative Bylaws",
+            "category": "governance",
+            "version": "1.0",
+            "hash": "266c7369a240625f860ea92b1d8983edd0f03d54f09eb89d1a33ff5e235279b3"
+          },
+          {
+            "id": "doc-worker-coop-patronage-policy",
+            "title": "Patronage Allocation and Labor Accounting Policy",
+            "category": "financial",
+            "version": "1.0",
+            "hash": "501ec7c9a6fecb02829b4e70e6ad8b00f188e76909c0b4f8936d2a7fb9cf7960"
+          }
+        ]
+      },
+      "nonce": 18,
+      "validator": "Alice Walker",
+      "hash": "067df9da569f049048105a5d74db72be240c2f5509efa66927015da0ce45e67c"
+    },
+    {
+      "index": 1,
+      "timestamp": "2026-09-08T02:51:05.688Z",
+      "previousHash": "067df9da569f049048105a5d74db72be240c2f5509efa66927015da0ce45e67c",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-worker-coop-articles",
+        "title": "Articles of Incorporation (Worker Cooperative)",
+        "category": "founding",
+        "version": "1.0",
+        "content": "# Articles of Incorporation of Worker Cooperative\n\n## Article I: Democratic Identity\nThe Cooperative is organized as a worker cooperative under applicable cooperative corporation law.\n\n## Article II: Rochdale Cooperative Principles\nThe Cooperative strictly adheres to the International Cooperative Alliance principles:\n1. Voluntary and Open Membership\n2. Democratic Member Control (One Member, One Vote)\n3. Member Economic Participation\n4. Autonomy and Independence\n5. Education, Training, and Information\n6. Cooperation among Cooperatives\n7. Concern for Community\n\n## Article III: Worker Ownership and Equality\nOnly natural persons actively employed by the Cooperative shall be eligible for worker-membership. Each member holds exactly one voting membership share.\n",
+        "contentHash": "d5051922802522686b937ff11fb59269935ddb78bcb52993c66802cc4dad03f4",
+        "effectiveDate": "2026-09-08T02:51:05.688Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 2,
+      "validator": "Alice Walker",
+      "hash": "0ec5e9a90e893d58317b696f2e05bdc66ba17f7c296d0f1913fa7149517ff635"
+    },
+    {
+      "index": 2,
+      "timestamp": "2026-09-08T02:51:05.688Z",
+      "previousHash": "0ec5e9a90e893d58317b696f2e05bdc66ba17f7c296d0f1913fa7149517ff635",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-worker-coop-bylaws",
+        "title": "Worker-Owner Cooperative Bylaws",
+        "category": "governance",
+        "version": "1.0",
+        "content": "# Worker Cooperative Bylaws\n\n## Article 1: Membership Criteria and Candidacy\n1.1 Candidacy Period: New prospective worker-members undergo a 6-month trial and mentorship period.\n1.2 Admission to Membership: Admission requires approval by a 75% affirmative vote of the General Assembly via LegitBlock vote.\n\n## Article 2: Governance & Democratic Assembly\n2.1 Supreme Authority: The General Assembly of all worker-members is the highest governing body.\n2.2 One-Member One-Vote: Voting power is strictly equal, regardless of capital contributions.\n\n## Article 3: Internal Capital Accounts and Patronage Dividends\n3.1 Patronage Basis: Net surplus is allocated to members based on hours worked (labor patronage), not capital invested.\n3.2 Collective Reserve: At least 20% of net surplus is retained in an indivisible collective reserve.\n",
+        "contentHash": "266c7369a240625f860ea92b1d8983edd0f03d54f09eb89d1a33ff5e235279b3",
+        "effectiveDate": "2026-09-08T02:51:05.688Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 6,
+      "validator": "Alice Walker",
+      "hash": "0bd146db31720dc9809d81bd3ab2cf72bbcef154c947940f3497c86759489add"
+    },
+    {
+      "index": 3,
+      "timestamp": "2026-09-08T02:51:05.688Z",
+      "previousHash": "0bd146db31720dc9809d81bd3ab2cf72bbcef154c947940f3497c86759489add",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-worker-coop-patronage-policy",
+        "title": "Patronage Allocation and Labor Accounting Policy",
+        "category": "financial",
+        "version": "1.0",
+        "content": "# Patronage Accounting and Distribution Policy\n\n## Labor Value Tracking\nAll member labor hours and patronage credits are audited and verified each fiscal quarter on the LegitBlock blockchain.\n",
+        "contentHash": "501ec7c9a6fecb02829b4e70e6ad8b00f188e76909c0b4f8936d2a7fb9cf7960",
+        "effectiveDate": "2026-09-08T02:51:05.688Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 4,
+      "validator": "Alice Walker",
+      "hash": "0b7f21a4b425034c67130d282e1a6d403cffd6408844d9ab83447ff83b63d522"
+    },
+    {
+      "index": 4,
+      "timestamp": "2026-09-08T02:51:05.740Z",
+      "previousHash": "0b7f21a4b425034c67130d282e1a6d403cffd6408844d9ab83447ff83b63d522",
+      "type": "DOCUMENT_AMEND",
+      "data": {
+        "action": "AMEND",
+        "proposalId": "prop-1788835865719-yfor9",
+        "documentId": "doc-worker-coop-articles",
+        "title": "Articles of Incorporation (Worker Cooperative)",
+        "version": "1.1",
+        "content": "# Articles of Incorporation of Worker Cooperative\n\n## Article I: Democratic Identity\nThe Cooperative is organized as a worker cooperative under applicable cooperative corporation law.\n\n## Article II: Rochdale Cooperative Principles\nThe Cooperative strictly adheres to the International Cooperative Alliance principles:\n1. Voluntary and Open Membership\n2. Democratic Member Control (One Member, One Vote)\n3. Member Economic Participation\n4. Autonomy and Independence\n5. Education, Training, and Information\n6. Cooperation among Cooperatives\n7. Concern for Community\n\n## Article III: Worker Ownership and Equality\nOnly natural persons actively employed by the Cooperative shall be eligible for worker-membership. Each member holds exactly one voting membership share.\n\n\n## Article IV: Technological Sovereignty\nAll organizational source code and digital infrastructure shall be maintained cooperatively on decentralized protocols.",
+        "contentHash": "f512ee100bd7cd4b424b35d4f49390b35f614cbf3545e13e876ff7b89415b30a",
+        "diff": "Index: Articles of Incorporation (Worker Cooperative)\n===================================================================\n--- Articles of Incorporation (Worker Cooperative)\tprevious\n+++ Articles of Incorporation (Worker Cooperative)\tproposed\n@@ -14,4 +14,8 @@\n 7. Concern for Community\n \n ## Article III: Worker Ownership and Equality\n Only natural persons actively employed by the Cooperative shall be eligible for worker-membership. Each member holds exactly one voting membership share.\n+\n+\n+## Article IV: Technological Sovereignty\n+All organizational source code and digital infrastructure shall be maintained cooperatively on decentralized protocols.\n\\ No newline at end of file\n",
+        "effectiveDate": "2026-09-08T02:51:05.740Z",
+        "status": "active",
+        "notes": "Ratified amendment via Proposal prop-1788835865719-yfor9"
+      },
+      "nonce": 2,
+      "validator": "bob",
+      "hash": "01464ee488fffb7aa3c70637693d9caf190d9d3b7eec2b12865683340fc02ee1"
+    },
+    {
+      "index": 5,
+      "timestamp": "2026-09-08T02:51:05.740Z",
+      "previousHash": "01464ee488fffb7aa3c70637693d9caf190d9d3b7eec2b12865683340fc02ee1",
+      "type": "VOTE_TALLY",
+      "data": {
+        "action": "VOTE_EXECUTE",
+        "proposalId": "prop-1788835865719-yfor9",
+        "type": "AMENDMENT",
+        "title": "Amend Articles of Incorporation to add Technological Sovereignty clause",
+        "description": "Proposed amendment drafted via CLI $EDITOR",
+        "proposer": {
+          "id": "alice",
+          "name": "Alice Walker"
+        },
+        "votingRule": {
+          "type": "SIMPLE_MAJORITY",
+          "name": "Simple Majority (>50%)",
+          "quorumPercentage": 50,
+          "passingThresholdPercentage": 50.01,
+          "description": "Requires more than 50% of cast non-abstaining votes to approve, with at least 50% member quorum."
+        },
+        "totalVotes": 2,
+        "approveVotes": 2,
+        "rejectVotes": 0,
+        "abstainVotes": 0,
+        "result": "PASSED",
+        "quorumMet": true,
+        "thresholdMet": true,
+        "votesSummary": [
+          {
+            "voterId": "alice",
+            "voterName": "Alice Walker",
+            "decision": "APPROVE",
+            "timestamp": "2026-09-08T02:51:05.724Z"
+          },
+          {
+            "voterId": "bob",
+            "voterName": "Bob Chen",
+            "decision": "APPROVE",
+            "timestamp": "2026-09-08T02:51:05.736Z"
+          }
+        ],
+        "executedAt": "2026-09-08T02:51:05.740Z"
+      },
+      "nonce": 6,
+      "validator": "bob",
+      "hash": "0b8330918c7100348928234c8a88d92f7af79e3ec7cd75d9e036fcc51bd3915d"
+    }
+  ]
+}

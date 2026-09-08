@@ -1,0 +1,19 @@
+{
+  "name": "@legitblock/legitblock-utils",
+  "version": "0.0.1",
+  "description": "LegitBlock a blockchain for maintaining your organization",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test-all.js && node test/test-all-workflows.js",
+    "test:workflows": "node test/test-all-workflows.js"
+  },
+  "keywords": [],
+  "author": "Joshua Edward McLaughlin Cox",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "diff": "^9.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "ldapts": "^9.0.0"
+  }
+}
