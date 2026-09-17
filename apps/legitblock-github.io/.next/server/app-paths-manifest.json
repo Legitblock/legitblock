@@ -1,11 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/architecture/page": "app/architecture/page.js",
   "/api-reference/page": "app/api-reference/page.js",
   "/cli/page": "app/cli/page.js",
+  "/architecture/page": "app/architecture/page.js",
   "/core-library/page": "app/core-library/page.js",
-  "/page": "app/page.js",
   "/playground/page": "app/playground/page.js",
+  "/page": "app/page.js",
   "/templates/page": "app/templates/page.js",
   "/web-app/page": "app/web-app/page.js",
   "/why-blockchain/page": "app/why-blockchain/page.js"

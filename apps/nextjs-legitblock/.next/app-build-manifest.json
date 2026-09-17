@@ -16,13 +16,6 @@
       "static/chunks/414-dfd9cee10d31c556.js",
       "static/chunks/app/layout-6656407330e39abd.js"
     ],
-    "/blockchain/page": [
-      "static/chunks/webpack-ea02740f160b546a.js",
-      "static/chunks/5b8f0dd8-be192d83a734b4b3.js",
-      "static/chunks/749-59397865284abaa9.js",
-      "static/chunks/main-app-30b291a70871ea60.js",
-      "static/chunks/app/blockchain/page-d77807414742295a.js"
-    ],
     "/documents/[id]/edit/page": [
       "static/chunks/webpack-ea02740f160b546a.js",
       "static/chunks/5b8f0dd8-be192d83a734b4b3.js",
@@ -30,6 +23,13 @@
       "static/chunks/main-app-30b291a70871ea60.js",
       "static/chunks/414-dfd9cee10d31c556.js",
       "static/chunks/app/documents/[id]/edit/page-9587a8838005148f.js"
+    ],
+    "/blockchain/page": [
+      "static/chunks/webpack-ea02740f160b546a.js",
+      "static/chunks/5b8f0dd8-be192d83a734b4b3.js",
+      "static/chunks/749-59397865284abaa9.js",
+      "static/chunks/main-app-30b291a70871ea60.js",
+      "static/chunks/app/blockchain/page-d77807414742295a.js"
     ],
     "/documents/[id]/page": [
       "static/chunks/webpack-ea02740f160b546a.js",
