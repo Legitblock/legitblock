@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { Block } from "./block.js";
 import { hashObject } from "./crypto.js";
+import { LegalPacketExporter } from "../documents/exporter.js";
 
 /**
  * Organizational Blockchain class managing the immutable ledger
@@ -109,6 +110,18 @@ export class Blockchain {
    */
   getLatestBlock() {
     return this.chain.length > 0 ? this.chain[this.chain.length - 1] : null;
+  }
+
+  /**
+   * Get block by index
+   * @param {number} index
+   * @returns {Block|null}
+   */
+  getBlock(index) {
+    if (index >= 0 && index < this.chain.length) {
+      return this.chain[index];
+    }
+    return null;
   }
 
   /**
@@ -424,6 +437,15 @@ export class Blockchain {
       difficulty: this.difficulty,
       chain: this.chain.map(b => b.toJSON())
     };
+  }
+
+  /**
+   * Export an official corporate legal packet according to DGCL § 224
+   * @param {object} [options={}]
+   * @returns {object}
+   */
+  exportLegalPacket(options = {}) {
+    return LegalPacketExporter.exportLegalPacket(this, options);
   }
 
   /**

@@ -1,4 +1,5 @@
 import { DefaultVotingRules, VotingRuleType, evaluateVotingRule } from "./votingRules.js";
+import { verifyBallotSignature } from "../auth/webauthn.js";
 
 export const ProposalType = {
   INITIAL_DOCUMENT: "INITIAL_DOCUMENT",
@@ -73,6 +74,30 @@ export class Proposal {
       timestamp: new Date().toISOString(),
       signature
     };
+  }
+
+  /**
+   * Verify the cryptographic signature on a cast ballot
+   * Supports both Ed25519 signatures and WebAuthn ES256 biometric passkey assertions
+   * @param {string} voterId
+   * @param {string} publicKeyPem
+   * @returns {{ valid: boolean, type: string, biometric?: boolean, reason?: string }}
+   */
+  verifyVoteSignature(voterId, publicKeyPem) {
+    const vote = this.votes[voterId];
+    if (!vote) {
+      return { valid: false, type: "none", reason: "No vote found for voter: " + voterId };
+    }
+    if (!vote.signature) {
+      return { valid: false, type: "none", reason: "Vote cast without cryptographic signature" };
+    }
+    return verifyBallotSignature({
+      proposalId: this.id,
+      voterId,
+      decision: vote.decision,
+      signature: vote.signature,
+      publicKeyPem
+    });
   }
 
   calculateTally(totalEligibleMembers = 1) {

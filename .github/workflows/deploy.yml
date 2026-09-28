@@ -1,11 +1,7 @@
-name: Deploy to GitHub Pages
+name: Deploy Redirect to GitHub Pages
 
 on:
   push:
-    branches:
-      - master
-      - main
-  pull_request:
     branches:
       - master
       - main
@@ -24,40 +20,40 @@ concurrency:
 
 jobs:
   build:
-    name: Build Site
+    name: Generate Redirect Bundle
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 12.3.4
-          run_install: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Setup Pages Configuration
-        id: pages
-        uses: actions/configure-pages@v5
-
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build Next.js Documentation Site
-        env:
-          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-        run: pnpm --filter legitblock-github-io build
+      - name: Create Redirect Files
+        run: |
+          mkdir -p out
+          cat << 'EOF' > out/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Redirecting to LegitBlock...</title>
+            <meta http-equiv="refresh" content="0; url=https://legitblock.github.io/">
+            <link rel="canonical" href="https://legitblock.github.io/">
+            <script>
+              var path = window.location.pathname.replace(/^\/legitblock/, '') || '/';
+              var target = 'https://legitblock.github.io' + (path.startsWith('/') ? path : '/' + path) + window.location.search + window.location.hash;
+              window.location.replace(target);
+            </script>
+          </head>
+          <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0b1120; color: #f8fafc; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+            <div style="text-align: center; padding: 20px;">
+              <h2>Redirecting to LegitBlock Official Portal...</h2>
+              <p style="color: #94a3b8;">If you are not redirected automatically, <a href="https://legitblock.github.io/" style="color: #10b981;">click here</a>.</p>
+            </div>
+          </body>
+          </html>
+          EOF
+          cp out/index.html out/404.html
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./apps/legitblock-github.io/out
+          path: ./out
 
   deploy:
     name: Deploy to GitHub Pages
@@ -66,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://legitblock.github.io/
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

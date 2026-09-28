@@ -9,13 +9,15 @@ export class VotingEngine {
   /**
    * @param {object} [options={}]
    * @param {Proposal[]} [options.proposals=[]]
+   * @param {import("../documents/covenants.js").CovenantEngine} [options.covenantEngine=null]
    */
-  constructor({ proposals = [] } = {}) {
+  constructor({ proposals = [], covenantEngine = null } = {}) {
     this.proposals = new Map();
     for (const p of proposals) {
       const prop = p instanceof Proposal ? p : Proposal.fromJSON(p);
       this.proposals.set(prop.id, prop);
     }
+    this.covenantEngine = covenantEngine;
   }
 
   /**
@@ -65,17 +67,27 @@ export class VotingEngine {
    * @param {string} params.voterId
    * @param {string} [params.voterName]
    * @param {"APPROVE"|"REJECT"|"ABSTAIN"} params.decision
-   * @param {string} [params.signature]
+   * @param {string|object} [params.signature]
    * @param {number} [params.totalEligibleMembers=1]
+   * @param {string} [params.publicKeyPem=null]
    * @returns {Proposal}
    */
-  castVote({ proposalId, voterId, voterName, decision, signature = null, totalEligibleMembers = 1 }) {
+  castVote({ proposalId, voterId, voterName, decision, signature = null, totalEligibleMembers = 1, publicKeyPem = null }) {
     const proposal = this.getProposal(proposalId);
     if (!proposal) {
       throw new Error("Proposal not found: " + proposalId);
     }
 
     proposal.castVote({ voterId, voterName, decision, signature });
+
+    if (publicKeyPem) {
+      const verification = proposal.verifyVoteSignature(voterId, publicKeyPem);
+      if (!verification.valid) {
+        delete proposal.votes[voterId];
+        throw new Error("Vote rejected: invalid cryptographic signature: " + (verification.reason || "Verification failed"));
+      }
+    }
+
     proposal.updateStatus(totalEligibleMembers);
     return proposal;
   }
@@ -85,12 +97,23 @@ export class VotingEngine {
    * @param {string} proposalId
    * @param {import("../blockchain/blockchain.js").Blockchain} blockchain
    * @param {string} [validator="system"]
+   * @param {object} [options={}]
+   * @param {import("../documents/covenants.js").CovenantEngine} [options.covenantEngine]
    * @returns {{ proposal: Proposal, block: import("../blockchain/block.js").Block }}
    */
-  executeProposal(proposalId, blockchain, validator = "system") {
+  executeProposal(proposalId, blockchain, validator = "system", options = {}) {
     const proposal = this.getProposal(proposalId);
     if (!proposal) {
       throw new Error("Proposal not found: " + proposalId);
+    }
+
+    const covEngine = options.covenantEngine || this.covenantEngine;
+    if (covEngine) {
+      const evalResult = covEngine.evaluateProposal(proposal, blockchain);
+      if (!evalResult.passed) {
+        const reasons = evalResult.violations.map(v => `${v.title}: ${v.reason}`).join("; ");
+        throw new Error("Cannot execute proposal: Constitutional covenant violation(s): " + reasons);
+      }
     }
 
     const members = blockchain.getMembers();

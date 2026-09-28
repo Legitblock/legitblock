@@ -10,9 +10,10 @@ export function MainMenu({ onSelect, user }) {
     { label: "🗳️  2. Governance Voting & Proposals", value: "voting" },
     { label: "📤  3. Upload / Write New Document (via $EDITOR)", value: "upload" },
     { label: "🔗  4. Cryptographic Blockchain Explorer", value: "explorer" },
-    { label: "👥  5. Member Directory", value: "members" },
-    { label: user ? `👤  6. Switch User (Currently: ${user.username})` : "🔑  6. Login via LDAP", value: "login" },
-    { label: "🚪  7. Exit CLI", value: "exit" }
+    { label: "🌳  5. Interactive ASCII Block Tree Visualizer", value: "tree" },
+    { label: "👥  6. Member Directory", value: "members" },
+    { label: user ? `👤  7. Switch User (Currently: ${user.username})` : "🔑  7. Login via LDAP", value: "login" },
+    { label: "🚪  8. Exit CLI", value: "exit" }
   ];
 
   return h(

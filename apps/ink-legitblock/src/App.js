@@ -8,6 +8,7 @@ import { DocumentsScreen } from "./components/DocumentsScreen.js";
 import { VotingScreen } from "./components/VotingScreen.js";
 import { UploadScreen } from "./components/UploadScreen.js";
 import { ExplorerScreen } from "./components/ExplorerScreen.js";
+import { TreeScreen } from "./components/TreeScreen.js";
 import { MembersScreen } from "./components/MembersScreen.js";
 
 const h = React.createElement;
@@ -101,6 +102,12 @@ export function App({ apiUrl = "http://localhost:3000" }) {
       : null,
     screen === "explorer"
       ? h(ExplorerScreen, {
+          client,
+          onBack: () => setScreen("menu")
+        })
+      : null,
+    screen === "tree"
+      ? h(TreeScreen, {
           client,
           onBack: () => setScreen("menu")
         })

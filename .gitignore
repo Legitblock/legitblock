@@ -61,6 +61,8 @@ RELEASE.md
 .verdaccio-cache
 .turbo
 .eslintcache
+.next
+**/.next/**
 .claude
 .local-settings
 .pnpm-typecheck.json
