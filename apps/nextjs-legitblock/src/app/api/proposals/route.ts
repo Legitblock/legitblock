@@ -24,6 +24,10 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const user = getUserFromRequest(req);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized: Active authenticated session required to submit proposals" }, { status: 401 });
+    }
+
     const body = await req.json();
     const {
       title,
@@ -39,9 +43,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Title is required" }, { status: 400 });
     }
 
-    const proposer = user
-      ? { id: user.username, name: user.name || user.username }
-      : { id: "member", name: "Voting Member" };
+    const proposer = { id: user.username, name: user.name || user.username };
 
     const rule = DefaultVotingRules[votingRuleType] || DefaultVotingRules[VotingRuleType.SIMPLE_MAJORITY];
     const engine = getVotingEngine();

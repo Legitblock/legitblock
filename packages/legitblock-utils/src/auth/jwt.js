@@ -1,6 +1,23 @@
+import crypto from "node:crypto";
 import jwt from "jsonwebtoken";
 
-const DEFAULT_SECRET = process.env.JWT_SECRET || "legitblock-secret-governance-key-2026";
+/**
+ * Retrieve the active JWT secret.
+ * Enforces that in production, JWT_SECRET must be explicitly configured.
+ * In development and test environments, an ephemeral cryptographically secure random secret is generated.
+ */
+function getJwtSecret() {
+  if (process.env.JWT_SECRET) {
+    return process.env.JWT_SECRET;
+  }
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("SECURITY ALERT: JWT_SECRET environment variable must be configured in production mode");
+  }
+  if (!globalThis.__LEGITBLOCK_DEV_JWT_SECRET) {
+    globalThis.__LEGITBLOCK_DEV_JWT_SECRET = crypto.randomBytes(32).toString("hex");
+  }
+  return globalThis.__LEGITBLOCK_DEV_JWT_SECRET;
+}
 
 /**
  * Sign a JWT token for an authenticated user session
@@ -9,7 +26,7 @@ const DEFAULT_SECRET = process.env.JWT_SECRET || "legitblock-secret-governance-k
  * @returns {string} Signed JWT token
  */
 export function signUserToken(payload, expiresIn = "24h") {
-  return jwt.sign(payload, DEFAULT_SECRET, { expiresIn });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn });
 }
 
 /**
@@ -19,7 +36,7 @@ export function signUserToken(payload, expiresIn = "24h") {
  */
 export function verifyUserToken(token) {
   try {
-    return jwt.verify(token, DEFAULT_SECRET);
+    return jwt.verify(token, getJwtSecret());
   } catch {
     return null;
   }

@@ -3,6 +3,22 @@ import { authenticateMockLdap, searchMockLdap, MOCK_LDAP_USERS } from "./mockLda
 import { signUserToken, verifyUserToken } from "./jwt.js";
 
 /**
+ * Escape an arbitrary string for safe inclusion in an RFC 4515 LDAP search filter assertion.
+ * Prevents LDAP injection by escaping \, *, (, ), and NUL.
+ * @param {string} input
+ * @returns {string} Escaped string safe for LDAP filter substitution
+ */
+export function escapeLdapFilter(input) {
+  if (typeof input !== "string") return "";
+  return input
+    .replace(/\\/g, "\\5c")
+    .replace(/\*/g, "\\2a")
+    .replace(/\(/g, "\\28")
+    .replace(/\)/g, "\\29")
+    .replace(/\x00/g, "\\00");
+}
+
+/**
  * Full LDAP Authentication and Authorization Provider
  * Supports connecting to standard LDAP / Active Directory servers,
  * with fallback to embedded mock directory for self-contained testing.
@@ -56,8 +72,9 @@ export class LDAPAuthProvider {
         await client.bind(this.config.bindDN, this.config.bindPassword);
       }
 
-      // Step 2: Search for user DN
-      const filter = this.config.userSearchFilter.replace(/{{username}}/g, username);
+      // Step 2: Search for user DN with escaped username to prevent LDAP injection
+      const safeUsername = escapeLdapFilter(username);
+      const filter = this.config.userSearchFilter.replace(/{{username}}/g, safeUsername);
       const { searchEntries } = await client.search(this.config.baseDN, {
         filter,
         scope: "sub",
@@ -125,8 +142,9 @@ export class LDAPAuthProvider {
       if (this.config.bindDN) {
         await client.bind(this.config.bindDN, this.config.bindPassword);
       }
-      const filter = query
-        ? `(&(objectClass=inetOrgPerson)(|(cn=*${query}*)(mail=*${query}*)))`
+      const safeQuery = escapeLdapFilter(query);
+      const filter = safeQuery
+        ? `(&(objectClass=inetOrgPerson)(|(cn=*${safeQuery}*)(mail=*${safeQuery}*)))`
         : "(objectClass=inetOrgPerson)";
 
       const { searchEntries } = await client.search(this.config.baseDN, {

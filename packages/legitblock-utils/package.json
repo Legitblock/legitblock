@@ -4,7 +4,7 @@
   "description": "LegitBlock a blockchain for maintaining your organization",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test-all.js && node test/test-all-workflows.js && node test/test-storage-adapters.js && node test/test-legal-exporter.js && node test/test-webauthn.js && node test/test-covenants.js && node test/test-oidc.js && node test/test-pdf-exporter.js && node test/test-merkle.js && node test/test-anchoring.js && node test/test-kms.js && node test/test-recusal.js && node test/test-jurisdictions.js && node test/test-secret-ballot.js",
+    "test": "node test/test-all.js && node test/test-all-workflows.js && node test/test-storage-adapters.js && node test/test-legal-exporter.js && node test/test-webauthn.js && node test/test-covenants.js && node test/test-oidc.js && node test/test-pdf-exporter.js && node test/test-merkle.js && node test/test-anchoring.js && node test/test-kms.js && node test/test-recusal.js && node test/test-jurisdictions.js && node test/test-secret-ballot.js && node test/test-proxy.js",
     "test:storage": "node test/test-storage-adapters.js",
     "test:exporter": "node test/test-legal-exporter.js",
     "test:webauthn": "node test/test-webauthn.js",
@@ -17,6 +17,7 @@
     "test:recusal": "node test/test-recusal.js",
     "test:jurisdictions": "node test/test-jurisdictions.js",
     "test:secret-ballot": "node test/test-secret-ballot.js",
+    "test:proxy": "node test/test-proxy.js",
     "test:workflows": "node test/test-all-workflows.js"
   },
   "keywords": [],

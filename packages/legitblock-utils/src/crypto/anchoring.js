@@ -185,7 +185,18 @@ export class Rfc3161TimestampAdapter {
         serialNumber,
         genTime: timestamp
       });
-      tsaSignature = crypto.sign(null, Buffer.from(tstInfoPayload), signerKey.privateKey).toString("hex");
+      let signAlgo = signerKey.algorithm;
+      if (!signAlgo) {
+        try {
+          const keyType = crypto.createPrivateKey(signerKey.privateKey).asymmetricKeyType;
+          signAlgo = keyType === "ed25519" ? null : "SHA256";
+        } catch {
+          signAlgo = null;
+        }
+      } else if (signAlgo === "ED25519") {
+        signAlgo = null;
+      }
+      tsaSignature = crypto.sign(signAlgo, Buffer.from(tstInfoPayload), signerKey.privateKey).toString("hex");
     }
 
     const proofPayload = Buffer.from(JSON.stringify({
@@ -236,12 +247,23 @@ export class Rfc3161TimestampAdapter {
           serialNumber: receipt.externalReference,
           genTime: receipt.timestamp
         });
-        return crypto.verify(
-          null,
-          Buffer.from(tstInfoPayload),
-          receipt.tsaPublicKey,
-          Buffer.from(receipt.tsaSignature, "hex")
-        );
+        let verifyAlgo = null;
+        try {
+          const keyType = crypto.createPublicKey(receipt.tsaPublicKey).asymmetricKeyType;
+          verifyAlgo = keyType === "ed25519" ? null : "SHA256";
+        } catch {
+          verifyAlgo = null;
+        }
+        try {
+          return crypto.verify(
+            verifyAlgo,
+            Buffer.from(tstInfoPayload),
+            receipt.tsaPublicKey,
+            Buffer.from(receipt.tsaSignature, "hex")
+          );
+        } catch {
+          return false;
+        }
       }
 
       return true;

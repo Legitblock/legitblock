@@ -41,6 +41,7 @@ export { DefaultVotingRules, VotingRuleType, evaluateVotingRule } from "./voting
 export { VotingEngine } from "./voting/engine.js";
 export { RecusalType, RecusalRecord, RecusalEngine } from "./voting/recusal.js";
 export { BlindedBallot, SecretBallotEngine } from "./voting/secret-ballot.js";
+export { ProxyGrant, ProxyEngine, ProxyScope } from "./voting/proxy.js";
 
 // Multi-Jurisdiction Compliance
 export {

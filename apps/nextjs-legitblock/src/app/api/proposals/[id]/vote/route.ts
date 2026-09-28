@@ -4,19 +4,38 @@ import { getVotingEngine, getBlockchain, saveAll, getUserFromRequest } from "@/l
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = getUserFromRequest(req);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized: Active authenticated session required to vote" }, { status: 401 });
+    }
+
     const body = await req.json();
-    const { decision, voterId, voterName, signature } = body;
+    const { decision, signature } = body;
 
     if (!decision || !["APPROVE", "REJECT", "ABSTAIN"].includes(decision)) {
       return NextResponse.json({ error: "Decision must be APPROVE, REJECT, or ABSTAIN" }, { status: 400 });
     }
 
-    const voterIdentifier = user ? user.username : (voterId || "member-" + Date.now());
-    const voterDisplayName = user ? (user.name || user.username) : (voterName || voterIdentifier);
+    const voterIdentifier = user.username;
+    const voterDisplayName = user.name || user.username;
 
     const bc = getBlockchain();
     const members = bc.getMembers();
+
+    // Verify voter is a recognized member
+    const isMember = members.some((m: any) => m.id === voterIdentifier || m.username === voterIdentifier);
+    if (!isMember && members.length > 0) {
+      return NextResponse.json({ error: "Forbidden: User is not an active eligible member of this organization" }, { status: 403 });
+    }
+
     const engine = getVotingEngine();
+    const existingProp = engine.getProposal(params.id);
+    if (!existingProp) {
+      return NextResponse.json({ error: "Proposal not found" }, { status: 404 });
+    }
+
+    if (existingProp.votes && existingProp.votes[voterIdentifier]) {
+      return NextResponse.json({ error: "Conflict: Member has already cast a vote on this proposal" }, { status: 409 });
+    }
 
     const proposal = engine.castVote({
       proposalId: params.id,

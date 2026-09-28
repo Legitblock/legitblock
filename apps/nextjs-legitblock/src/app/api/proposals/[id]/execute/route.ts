@@ -4,7 +4,10 @@ import { getVotingEngine, getBlockchain, saveAll, getUserFromRequest } from "@/l
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   try {
     const user = getUserFromRequest(req);
-    const validator = user ? user.username : "system-validator";
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized: Active authenticated session required to execute proposals" }, { status: 401 });
+    }
+    const validator = user.username;
 
     const bc = getBlockchain();
     const engine = getVotingEngine();

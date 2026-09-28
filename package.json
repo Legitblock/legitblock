@@ -18,6 +18,11 @@
       "onFail": "download"
     }
   },
+  "pnpm": {
+    "overrides": {
+      "postcss": ">=8.5.23"
+    }
+  },
   "packageManager": "pnpm@12.3.4",
   "type": "module"
 }

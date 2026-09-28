@@ -63,6 +63,9 @@ export class Proposal {
     if (this.status === ProposalStatus.EXECUTED || this.status === ProposalStatus.CANCELLED) {
       throw new Error("Cannot vote on proposal with status: " + this.status);
     }
+    if (this.expiresAt && new Date() > new Date(this.expiresAt)) {
+      throw new Error("Voting window for proposal " + this.id + " has expired");
+    }
     if (!Object.values(VoteDecision).includes(decision)) {
       throw new Error("Invalid vote decision: " + decision + ". Must be APPROVE, REJECT, or ABSTAIN");
     }
