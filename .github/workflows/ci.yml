@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - master
-      - main
   pull_request:
     branches:
       - master
-      - main
   workflow_dispatch:
 
 jobs:
@@ -34,11 +32,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Test Core Utils (14 Test Suites)
+      - name: Test Core Utils (15 Test Suites)
         run: pnpm --filter @legitblock/legitblock-utils test
 
       - name: Build Next.js Governance Portal
-        run: pnpm --filter legitblock-web build
+        run: pnpm --filter nextjs-legitblock build
 
       - name: Verify Ink Terminal CLI
         run: node apps/ink-legitblock/src/cli.js --help
