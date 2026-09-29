@@ -105,5 +105,14 @@ export { MemoryStorageAdapter } from "./storage/memoryAdapter.js";
 export { FileStorageAdapter } from "./storage/fileAdapter.js";
 export { IndexedDBStorageAdapter } from "./storage/indexedDbAdapter.js";
 
+// Git-Native Storage & Multi-Forge Support (GitHub, GitLab, Forgejo/Codeberg, Local)
+export { GitStorageAdapter } from "./storage/git/gitAdapter.js";
+export { BaseGitDriver } from "./storage/git/drivers/baseGitDriver.js";
+export { LocalGitDriver } from "./storage/git/drivers/localGitDriver.js";
+export { GitHubDriver } from "./storage/git/drivers/githubDriver.js";
+export { GitLabDriver } from "./storage/git/drivers/gitlabDriver.js";
+export { ForgejoDriver } from "./storage/git/drivers/forgejoDriver.js";
+export { createGitDriver, createGitStorageAdapter } from "./storage/git/forgeRouter.js";
+
 // Developer Tooling & Git Pre-Commit Hooks
 export { GitNotarizer } from "./cli/gitHook.js";
