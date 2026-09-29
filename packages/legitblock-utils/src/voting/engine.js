@@ -119,8 +119,31 @@ export class VotingEngine {
     const members = blockchain.getMembers();
     proposal.updateStatus(members.length);
 
-    if (proposal.status !== ProposalStatus.PASSED && proposal.status !== ProposalStatus.ACTIVE) {
-      throw new Error("Cannot execute proposal with status: " + proposal.status + ". Must be PASSED or meeting threshold.");
+    if (proposal.status === ProposalStatus.VETOED) {
+      throw new Error("Cannot execute proposal: Proposal was vetoed by Compliance Officer: " + (proposal.vetoRecord?.reason || "Vetoed"));
+    }
+
+    if (proposal.timelockDelaySeconds > 0) {
+      if (proposal.status === ProposalStatus.PASSED || proposal.status === ProposalStatus.ACTIVE) {
+        proposal.queueForExecution();
+        return {
+          proposal,
+          queued: true,
+          status: ProposalStatus.QUEUED,
+          unlockAt: proposal.unlockAt,
+          message: `Proposal has entered statutory timelock delay queue. Unlocks at: ${proposal.unlockAt}`
+        };
+      }
+      if (proposal.status === ProposalStatus.QUEUED) {
+        const currentTime = options.currentTime || Date.now();
+        if (!proposal.isReadyForExecution(currentTime)) {
+          throw new Error(`Cannot execute proposal: Statutory timelock has not expired. Unlocks at: ${proposal.unlockAt}`);
+        }
+      }
+    } else {
+      if (proposal.status !== ProposalStatus.PASSED && proposal.status !== ProposalStatus.ACTIVE && proposal.status !== ProposalStatus.QUEUED) {
+        throw new Error("Cannot execute proposal with status: " + proposal.status + ". Must be PASSED, QUEUED, or meeting threshold.");
+      }
     }
 
     // Force final tally check
@@ -176,6 +199,25 @@ export class VotingEngine {
     proposal.executedBlockIndex = resultingBlock.index;
 
     return { proposal, block: resultingBlock };
+  }
+
+  /**
+   * Exercise statutory emergency veto on a proposal
+   * @param {object} params
+   * @param {string} params.proposalId
+   * @param {string} params.complianceOfficerId
+   * @param {string} [params.role="Compliance Officer"]
+   * @param {string} params.reason
+   * @param {string|object} [params.signature=null]
+   * @returns {{ proposal: Proposal, vetoRecord: object }}
+   */
+  vetoProposal({ proposalId, complianceOfficerId, role = "Compliance Officer", reason, signature = null }) {
+    const proposal = this.getProposal(proposalId);
+    if (!proposal) {
+      throw new Error("Proposal not found: " + proposalId);
+    }
+    const vetoRecord = proposal.veto({ complianceOfficerId, role, reason, signature });
+    return { proposal, vetoRecord };
   }
 
   toJSON() {

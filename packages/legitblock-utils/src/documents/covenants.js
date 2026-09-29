@@ -1,4 +1,5 @@
 import { sha256, stringifyCanonical } from "../blockchain/crypto.js";
+import { ZkRangeProofEngine } from "../crypto/zk.js";
 
 /**
  * Smart Legal Covenants & Constitutional Rule Assertions for LegitBlock.
@@ -10,6 +11,7 @@ export const CovenantType = {
   SUPERMAJORITY_REQUIRED: "SUPERMAJORITY_REQUIRED",
   MIN_REVIEW_HOURS: "MIN_REVIEW_HOURS",
   MANDATORY_ROLE_APPROVAL: "MANDATORY_ROLE_APPROVAL",
+  ZERO_KNOWLEDGE_RANGE: "ZERO_KNOWLEDGE_RANGE",
   CUSTOM_PREDICATE: "CUSTOM_PREDICATE"
 };
 
@@ -176,6 +178,37 @@ export class CovenantEngine {
             if (!approvedByRole) {
               satisfied = false;
               reason = `Mandatory affirmative vote required from member holding role: ${requiredRole}`;
+            }
+          }
+          break;
+        }
+
+        case CovenantType.ZERO_KNOWLEDGE_RANGE: {
+          const metricName = cov.parameters.metricName || "financialMetric";
+          const requiredMin = cov.parameters.min !== undefined ? cov.parameters.min : null;
+          const requiredMax = cov.parameters.max !== undefined ? cov.parameters.max : null;
+          const expectedCommitment = cov.parameters.commitment || null;
+
+          const zkPayload = proposal.documentData?.zkProofs?.[metricName] ||
+                            proposal.documentData?.zkCovenantProof ||
+                            proposal.zkProof;
+
+          if (!zkPayload || !zkPayload.proof) {
+            satisfied = false;
+            reason = `Missing required Zero-Knowledge range proof for covenant: ${cov.title} (${metricName})`;
+          } else {
+            const verification = ZkRangeProofEngine.verifyRangeProof(zkPayload.proof, {
+              min: requiredMin,
+              max: requiredMax,
+              commitment: expectedCommitment || zkPayload.commitment
+            });
+
+            if (!verification.valid) {
+              satisfied = false;
+              reason = `Zero-Knowledge proof rejected: ${verification.reason}`;
+            } else {
+              satisfied = true;
+              reason = `Zero-Knowledge proof cryptographically verified: ${metricName} satisfies threshold without revealing confidential value (Commitment: ${zkPayload.proof.commitment.substring(0, 16)}...)`;
             }
           }
           break;

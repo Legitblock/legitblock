@@ -1,6 +1,7 @@
 // Blockchain core
 export { Block } from "./blockchain/block.js";
 export { Blockchain } from "./blockchain/blockchain.js";
+export { EvmBridge } from "./blockchain/evmBridge.js";
 export {
   sha256,
   hashObject,
@@ -10,12 +11,18 @@ export {
   verifySignature
 } from "./blockchain/crypto.js";
 
-// Advanced Cryptography: Merkle Trees & Public Anchoring
+// Advanced Cryptography: Merkle Trees, ZK Proofs, Post-Quantum & Public Anchoring
 export {
   MerkleLegalTree,
   hashLeaf,
   hashBranch
 } from "./crypto/merkle.js";
+export {
+  ZkRangeProofEngine
+} from "./crypto/zk.js";
+export {
+  PqcHybridSigner
+} from "./crypto/pqc.js";
 export {
   AnchorAuthority,
   AnchorReceipt,
@@ -33,6 +40,7 @@ export {
   getDiffLines
 } from "./documents/diff.js";
 export { LegalPacketExporter } from "./documents/exporter.js";
+export { StatutoryTaxExporter } from "./documents/taxExporter.js";
 export { Covenant, CovenantType, CovenantEngine } from "./documents/covenants.js";
 
 // Voting & Governance
@@ -42,6 +50,8 @@ export { VotingEngine } from "./voting/engine.js";
 export { RecusalType, RecusalRecord, RecusalEngine } from "./voting/recusal.js";
 export { BlindedBallot, SecretBallotEngine } from "./voting/secret-ballot.js";
 export { ProxyGrant, ProxyEngine, ProxyScope } from "./voting/proxy.js";
+export { QuadraticVotingSession } from "./voting/quadratic.js";
+export { ConvictionProposal, ConvictionVotingEngine } from "./voting/conviction.js";
 
 // Multi-Jurisdiction Compliance
 export {
@@ -71,6 +81,7 @@ export {
   verifyWebAuthnAssertion,
   verifyBallotSignature
 } from "./auth/webauthn.js";
+export { WebAuthnPrfEngine } from "./auth/webauthn-prf.js";
 export {
   verifyOidcToken,
   decodeJwt,

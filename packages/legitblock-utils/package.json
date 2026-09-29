@@ -4,7 +4,7 @@
   "description": "LegitBlock a blockchain for maintaining your organization",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test-all.js && node test/test-all-workflows.js && node test/test-storage-adapters.js && node test/test-legal-exporter.js && node test/test-webauthn.js && node test/test-covenants.js && node test/test-oidc.js && node test/test-pdf-exporter.js && node test/test-merkle.js && node test/test-anchoring.js && node test/test-kms.js && node test/test-recusal.js && node test/test-jurisdictions.js && node test/test-secret-ballot.js && node test/test-proxy.js",
+    "test": "node test/test-all.js && node test/test-all-workflows.js && node test/test-storage-adapters.js && node test/test-legal-exporter.js && node test/test-webauthn.js && node test/test-covenants.js && node test/test-oidc.js && node test/test-pdf-exporter.js && node test/test-merkle.js && node test/test-anchoring.js && node test/test-kms.js && node test/test-recusal.js && node test/test-jurisdictions.js && node test/test-secret-ballot.js && node test/test-proxy.js && node test/test-zk-covenants.js && node test/test-pqc.js && node test/test-timelock.js && node test/test-quadratic-conviction.js && node test/test-evm-tax-prf.js",
     "test:storage": "node test/test-storage-adapters.js",
     "test:exporter": "node test/test-legal-exporter.js",
     "test:webauthn": "node test/test-webauthn.js",
@@ -18,7 +18,12 @@
     "test:jurisdictions": "node test/test-jurisdictions.js",
     "test:secret-ballot": "node test/test-secret-ballot.js",
     "test:proxy": "node test/test-proxy.js",
-    "test:workflows": "node test/test-all-workflows.js"
+    "test:workflows": "node test/test-all-workflows.js",
+    "test:zk": "node test/test-zk-covenants.js",
+    "test:pqc": "node test/test-pqc.js",
+    "test:timelock": "node test/test-timelock.js",
+    "test:quadratic": "node test/test-quadratic-conviction.js",
+    "test:evm-tax-prf": "node test/test-evm-tax-prf.js"
   },
   "keywords": [],
   "author": "Joshua Edward McLaughlin Cox",

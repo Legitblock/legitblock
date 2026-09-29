@@ -13,6 +13,8 @@ export const ProposalType = {
 export const ProposalStatus = {
   ACTIVE: "ACTIVE",
   PASSED: "PASSED",
+  QUEUED: "QUEUED",
+  VETOED: "VETOED",
   REJECTED: "REJECTED",
   EXECUTED: "EXECUTED",
   CANCELLED: "CANCELLED"
@@ -40,7 +42,11 @@ export class Proposal {
     tally = null,
     createdAt = null,
     expiresAt = null,
-    executedBlockIndex = null
+    executedBlockIndex = null,
+    timelockDelaySeconds = 0,
+    queuedAt = null,
+    unlockAt = null,
+    vetoRecord = null
   }) {
     this.id = id || "prop-" + Date.now() + "-" + Math.random().toString(36).substring(2, 7);
     this.type = type;
@@ -56,7 +62,46 @@ export class Proposal {
     this.createdAt = createdAt || new Date().toISOString();
     this.expiresAt = expiresAt || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
     this.executedBlockIndex = executedBlockIndex;
+    this.timelockDelaySeconds = timelockDelaySeconds;
+    this.queuedAt = queuedAt;
+    this.unlockAt = unlockAt;
+    this.vetoRecord = vetoRecord;
     this.tally = tally || this.calculateTally(1);
+  }
+
+  queueForExecution(delaySeconds = null) {
+    const delay = delaySeconds !== null ? delaySeconds : (this.timelockDelaySeconds || 0);
+    this.status = ProposalStatus.QUEUED;
+    const now = Date.now();
+    this.queuedAt = new Date(now).toISOString();
+    this.unlockAt = new Date(now + delay * 1000).toISOString();
+    return this;
+  }
+
+  isReadyForExecution(currentTime = Date.now()) {
+    if (this.status === ProposalStatus.PASSED) {
+      return (this.timelockDelaySeconds || 0) === 0;
+    }
+    if (this.status === ProposalStatus.QUEUED) {
+      if (!this.unlockAt) return true;
+      return currentTime >= new Date(this.unlockAt).getTime();
+    }
+    return false;
+  }
+
+  veto({ complianceOfficerId, role = "Compliance Officer", reason, signature = null }) {
+    if (this.status === ProposalStatus.EXECUTED) {
+      throw new Error("Cannot veto a proposal that has already been executed on the blockchain");
+    }
+    this.status = ProposalStatus.VETOED;
+    this.vetoRecord = {
+      vetoedBy: complianceOfficerId,
+      role,
+      reason,
+      timestamp: new Date().toISOString(),
+      signature
+    };
+    return this.vetoRecord;
   }
 
   castVote({ voterId, voterName, decision, signature = null }) {
@@ -136,7 +181,12 @@ export class Proposal {
   }
 
   updateStatus(totalEligibleMembers = 1) {
-    if (this.status === ProposalStatus.EXECUTED || this.status === ProposalStatus.CANCELLED) {
+    if (
+      this.status === ProposalStatus.EXECUTED ||
+      this.status === ProposalStatus.CANCELLED ||
+      this.status === ProposalStatus.QUEUED ||
+      this.status === ProposalStatus.VETOED
+    ) {
       return this.status;
     }
 
@@ -167,7 +217,11 @@ export class Proposal {
       tally: this.tally,
       createdAt: this.createdAt,
       expiresAt: this.expiresAt,
-      executedBlockIndex: this.executedBlockIndex
+      executedBlockIndex: this.executedBlockIndex,
+      timelockDelaySeconds: this.timelockDelaySeconds,
+      queuedAt: this.queuedAt,
+      unlockAt: this.unlockAt,
+      vetoRecord: this.vetoRecord
     };
   }
 
