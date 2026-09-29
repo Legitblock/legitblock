@@ -104,3 +104,6 @@ export { StorageAdapter } from "./storage/adapter.js";
 export { MemoryStorageAdapter } from "./storage/memoryAdapter.js";
 export { FileStorageAdapter } from "./storage/fileAdapter.js";
 export { IndexedDBStorageAdapter } from "./storage/indexedDbAdapter.js";
+
+// Developer Tooling & Git Pre-Commit Hooks
+export { GitNotarizer } from "./cli/gitHook.js";
