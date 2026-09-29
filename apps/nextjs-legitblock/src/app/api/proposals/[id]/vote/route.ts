@@ -22,8 +22,11 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const members = bc.getMembers();
 
     // Verify voter is a recognized member
+    if (!members || members.length === 0) {
+      return NextResponse.json({ error: "Forbidden: No eligible voting members are configured for this organization" }, { status: 403 });
+    }
     const isMember = members.some((m: any) => m.id === voterIdentifier || m.username === voterIdentifier);
-    if (!isMember && members.length > 0) {
+    if (!isMember) {
       return NextResponse.json({ error: "Forbidden: User is not an active eligible member of this organization" }, { status: 403 });
     }
 
@@ -43,7 +46,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
       voterName: voterDisplayName,
       decision,
       signature: signature || null,
-      totalEligibleMembers: members.length || 1
+      totalEligibleMembers: members.length
     });
 
     saveAll();

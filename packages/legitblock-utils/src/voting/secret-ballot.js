@@ -10,12 +10,6 @@ const RFC3526_P_HEX =
   "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE65381" +
   "FFFFFFFFFFFFFFFF";
 
-const P = BigInt("0x" + RFC3526_P_HEX);
-const Q = (P - 1n) / 2n;
-const G = 2n;
-// Independent secondary generator derived deterministically: h = sha256(p) mod p
-const H = (BigInt("0x" + sha256(RFC3526_P_HEX)) % (P - 3n)) + 2n;
-
 /**
  * Modular exponentiation: (base^exp) mod mod
  */
@@ -32,6 +26,13 @@ function modPow(base, exp, mod) {
   }
   return res;
 }
+
+const P = BigInt("0x" + RFC3526_P_HEX);
+const Q = (P - 1n) / 2n;
+// Ensure generators reside in prime-order subgroup of order Q by squaring mod P (quadratic residues)
+const G = modPow(2n, 2n, P);
+const H_raw = (BigInt("0x" + sha256(RFC3526_P_HEX)) % (P - 3n)) + 2n;
+const H = modPow(H_raw, 2n, P);
 
 /**
  * Blinded Secret Ballot Commitment

@@ -47,6 +47,11 @@ export const DefaultVotingRules = {
   }
 };
 
+export const AbstentionTreatment = {
+  EXCLUDE_FROM_DENOMINATOR: "EXCLUDE_FROM_DENOMINATOR", // Parliamentary / Robert's Rules default
+  COUNT_AS_DISAPPROVAL: "COUNT_AS_DISAPPROVAL" // Delaware DGCL § 216 default (present & entitled to vote)
+};
+
 /**
  * Check if a vote tally passes the voting rule and quorum
  * @param {object} tally - { totalEligible, totalCast, approve, reject, abstain }
@@ -57,6 +62,7 @@ export function evaluateVotingRule(tally, rule = DefaultVotingRules.SIMPLE_MAJOR
   const { totalEligible = 1, totalCast = 0, approve = 0, reject = 0, abstain = 0 } = tally;
   const quorumPercentage = rule.quorumPercentage ?? 50;
   const passingThreshold = rule.passingThresholdPercentage ?? 50.01;
+  const abstentionTreatment = rule.abstentionTreatment || AbstentionTreatment.EXCLUDE_FROM_DENOMINATOR;
 
   // Quorum check (total participants who cast vote vs total eligible members)
   const participationRate = totalEligible > 0 ? (totalCast / totalEligible) * 100 : 0;
@@ -71,8 +77,11 @@ export function evaluateVotingRule(tally, rule = DefaultVotingRules.SIMPLE_MAJOR
     };
   }
 
-  // Passing threshold check (approvals vs non-abstaining votes)
-  const decidingVotes = approve + reject;
+  // Passing threshold check (approvals vs deciding votes)
+  const decidingVotes = abstentionTreatment === AbstentionTreatment.COUNT_AS_DISAPPROVAL
+    ? approve + reject + abstain
+    : approve + reject;
+
   if (decidingVotes === 0) {
     return {
       passed: false,

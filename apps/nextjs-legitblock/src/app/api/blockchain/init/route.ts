@@ -24,6 +24,16 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Organization name and type are required" }, { status: 400 });
     }
 
+    // Enforce bootstrap authorization token if configured in environment
+    const requiredBootstrapToken = process.env.INIT_BOOTSTRAP_TOKEN || process.env.LEGITBLOCK_INIT_TOKEN;
+    if (requiredBootstrapToken) {
+      const headerToken = req.headers.get("x-bootstrap-token");
+      const providedToken = headerToken || body.bootstrapToken;
+      if (!providedToken || providedToken !== requiredBootstrapToken) {
+        return NextResponse.json({ error: "Unauthorized: Valid bootstrap authorization token required to initialize blockchain" }, { status: 401 });
+      }
+    }
+
     const user = getUserFromRequest(req);
     const validatorName = user ? user.username : (foundingMembers[0]?.name || "founder");
 

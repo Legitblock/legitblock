@@ -12,6 +12,10 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const user = getUserFromRequest(req);
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized: Active authenticated session required to propose new documents" }, { status: 401 });
+    }
+
     const body = await req.json();
     const { title, category = "operational", content = "", description = "" } = body;
 
@@ -23,9 +27,7 @@ export async function POST(req: Request) {
     const engine = getVotingEngine();
 
     // Any new document requires a vote through the blockchain!
-    const proposer = user
-      ? { id: user.username, name: user.name || user.username }
-      : { id: "anonymous-member", name: "Anonymous Member" };
+    const proposer = { id: user.username, name: user.name || user.username };
 
     const proposal = engine.createProposal({
       type: ProposalType.NEW_DOCUMENT,

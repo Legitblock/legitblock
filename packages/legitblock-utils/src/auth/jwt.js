@@ -26,7 +26,7 @@ function getJwtSecret() {
  * @returns {string} Signed JWT token
  */
 export function signUserToken(payload, expiresIn = "24h") {
-  return jwt.sign(payload, getJwtSecret(), { expiresIn });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn, algorithm: "HS256" });
 }
 
 /**
@@ -36,7 +36,7 @@ export function signUserToken(payload, expiresIn = "24h") {
  */
 export function verifyUserToken(token) {
   try {
-    return jwt.verify(token, getJwtSecret());
+    return jwt.verify(token, getJwtSecret(), { algorithms: ["HS256"] });
   } catch {
     return null;
   }

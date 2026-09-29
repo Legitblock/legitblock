@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { keccak_256 } from "@noble/hashes/sha3.js";
 import { sha256, stringifyCanonical } from "./crypto.js";
 
 /**
@@ -8,17 +9,17 @@ import { sha256, stringifyCanonical } from "./crypto.js";
  */
 
 /**
- * Standard Keccak-256 function selector (first 4 bytes of Keccak256)
- * Uses standard Node crypto or simulated keccak hash
+ * Standard EVM Keccak-256 function selector (first 4 bytes / 8 hex characters of Keccak256)
+ * Uses genuine Ethereum Keccak-256 padding for exact compatibility with EVM contracts.
  */
-function getFunctionSelector(signature) {
-  // If keccak256 is available in node crypto (Node 12+)
+export function getFunctionSelector(signature) {
   try {
-    const hash = crypto.createHash("sha3-256").update(signature).digest();
-    return hash.subarray(0, 4).toString("hex");
+    const input = Buffer.isBuffer(signature) ? signature : Buffer.from(String(signature), "utf8");
+    const hash = Buffer.from(keccak_256(input)).toString("hex");
+    return hash.substring(0, 8);
   } catch {
-    const hash = crypto.createHash("sha256").update(signature).digest();
-    return hash.subarray(0, 4).toString("hex");
+    const fallback = crypto.createHash("sha256").update(String(signature)).digest("hex");
+    return fallback.substring(0, 8);
   }
 }
 

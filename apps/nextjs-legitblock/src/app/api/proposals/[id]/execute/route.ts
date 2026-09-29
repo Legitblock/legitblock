@@ -12,8 +12,18 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     const bc = getBlockchain();
     const engine = getVotingEngine();
 
-    const result = engine.executeProposal(params.id, bc, validator);
+    const result = engine.executeProposal(params.id, bc, validator) as any;
     saveAll();
+
+    if (result.queued) {
+      return NextResponse.json({
+        success: true,
+        queued: true,
+        message: result.message,
+        proposal: result.proposal.toJSON(),
+        unlockAt: result.unlockAt
+      });
+    }
 
     return NextResponse.json({
       success: true,

@@ -34,6 +34,10 @@ export class LDAPAuthProvider {
    * @param {boolean} [config.useMock=true] - Use mock directory when true or if url is not provided
    */
   constructor(config = {}) {
+    if (process.env.NODE_ENV === "production" && !process.env.LDAP_URL && !config.url && config.useMock !== true) {
+      throw new Error("SECURITY ALERT: LDAP_URL environment variable must be configured in production mode");
+    }
+
     this.config = {
       url: process.env.LDAP_URL || config.url,
       baseDN: process.env.LDAP_BASE_DN || config.baseDN || "dc=legitblock,dc=org",

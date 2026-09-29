@@ -1,7 +1,7 @@
 // Blockchain core
 export { Block } from "./blockchain/block.js";
 export { Blockchain } from "./blockchain/blockchain.js";
-export { EvmBridge } from "./blockchain/evmBridge.js";
+export { EvmBridge, getFunctionSelector } from "./blockchain/evmBridge.js";
 export {
   sha256,
   hashObject,
@@ -45,7 +45,7 @@ export { Covenant, CovenantType, CovenantEngine } from "./documents/covenants.js
 
 // Voting & Governance
 export { Proposal, ProposalType, ProposalStatus, VoteDecision } from "./voting/proposal.js";
-export { DefaultVotingRules, VotingRuleType, evaluateVotingRule } from "./voting/votingRules.js";
+export { DefaultVotingRules, VotingRuleType, evaluateVotingRule, AbstentionTreatment } from "./voting/votingRules.js";
 export { VotingEngine } from "./voting/engine.js";
 export { RecusalType, RecusalRecord, RecusalEngine } from "./voting/recusal.js";
 export { BlindedBallot, SecretBallotEngine } from "./voting/secret-ballot.js";

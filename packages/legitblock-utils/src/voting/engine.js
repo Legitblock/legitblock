@@ -99,7 +99,7 @@ export class VotingEngine {
    * @param {string} [validator="system"]
    * @param {object} [options={}]
    * @param {import("../documents/covenants.js").CovenantEngine} [options.covenantEngine]
-   * @returns {{ proposal: Proposal, block: import("../blockchain/block.js").Block }}
+   * @returns {{ proposal: Proposal, block?: import("../blockchain/block.js").Block, queued?: boolean, status?: string, unlockAt?: string, message?: string }}
    */
   executeProposal(proposalId, blockchain, validator = "system", options = {}) {
     const proposal = this.getProposal(proposalId);
