@@ -86,19 +86,47 @@ export async function checkGovernanceEntitlement(orgId: string, featureKey: stri
 }
 
 /**
- * Records metered usage for corporate blockchain state transitions and proposal votes.
+ * Records metered usage for corporate blockchain state transitions and proposal votes,
+ * dispatching latency metrics and SLA telemetry to OpenSnowcat.
  */
 export async function recordGovernanceActionUsage(params: {
   orgId: string;
   actionType: 'BLOCK_MINE' | 'PROPOSAL_CREATE' | 'VOTE_CAST' | 'DOCUMENT_ANCHOR';
   blockHeight?: number;
 }) {
+  const start = Date.now();
   const client = getBillamaClient();
-  return await client.billing.recordUsage({
-    appId: 'legitblock',
-    featureKey: `governance_${params.actionType.toLowerCase()}`,
-    quantity: 1,
-    customerId: params.orgId,
-    orgId: params.orgId,
-  });
+  let error = false;
+  try {
+    const res = await client.billing.recordUsage({
+      appId: 'legitblock',
+      featureKey: `governance_${params.actionType.toLowerCase()}`,
+      quantity: 1,
+      customerId: params.orgId,
+      orgId: params.orgId,
+    });
+    return res;
+  } catch (err) {
+    error = true;
+    throw err;
+  } finally {
+    const latencyMs = Date.now() - start;
+    try {
+      await client.snowcat.trackEngineering({
+        metricName: 'governance_ledger_block_commit',
+        value: latencyMs,
+        unit: 'ms',
+        component: 'legitblock_ledger_engine',
+        orgId: params.orgId,
+        error,
+        tags: {
+          action: params.actionType,
+          blockHeight: String(params.blockHeight || 0),
+        },
+      });
+    } catch {
+      // Never fail core billing for telemetry
+    }
+  }
 }
+

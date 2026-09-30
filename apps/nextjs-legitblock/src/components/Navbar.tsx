@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { ShieldCheck, FileText, Vote, Layers, Users, LogIn, LogOut, CheckCircle, AlertTriangle, Compass } from "lucide-react";
+import { ShieldCheck, FileText, Vote, Layers, Users, LogIn, LogOut, CheckCircle, AlertTriangle, Compass, ShoppingBag } from "lucide-react";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -38,6 +38,7 @@ export function Navbar() {
     { href: "/proposals", label: "Voting", icon: Vote },
     { href: "/blockchain", label: "Explorer", icon: Layers },
     { href: "/members", label: "Members", icon: Users },
+    { href: "/shop", label: "Shop", icon: ShoppingBag },
   ];
 
   return (
