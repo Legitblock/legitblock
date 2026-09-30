@@ -1,6 +1,6 @@
 /**
  * LegitBlock Ecosystem Corporate Charter Initializer
- * Seals the Genesis governance blocks for the five commercial ventures in the Billama ecosystem.
+ * Seals the Genesis governance blocks for sample corporate charters and legal entities.
  */
 
 import { Blockchain } from "./blockchain/blockchain.js";
@@ -25,50 +25,50 @@ import { getTemplateById } from "./templates/index.js";
 /** @type {CompanyCharterConfig[]} */
 export const ECOSYSTEM_VENTURES = [
   {
-    companyName: "Billama Inc.",
+    companyName: "Acme Quantum Dynamics Inc.",
     templateId: "c_corp_delaware",
     jurisdiction: "Delaware",
     foundingMembers: [
-      { id: "founder-josh", name: "Joshua Cox", role: "Chief Executive Officer & Director", votingWeight: 1 },
-      { id: "director-tech", name: "Technical Co-Founder", role: "Chief Technology Officer & Director", votingWeight: 1 },
+      { id: "founder-joshua", name: "Joshua Edward McLaughlin Cox", role: "Chief Executive Officer & Director", votingWeight: 1 },
+      { id: "director-jem", name: "J EM Cox", role: "Chief Technology Officer & Director", votingWeight: 1 },
     ],
   },
   {
-    companyName: "Syncromancer Cooperative",
+    companyName: "Hyperion Sonic Collective",
     templateId: "platform_coop",
     jurisdiction: "California",
     foundingMembers: [
-      { id: "founder-josh", name: "Joshua Cox", role: "Board President", votingWeight: 1 },
-      { id: "artist-lead", name: "Artist Syndicate Representative", role: "Vice President", votingWeight: 1 },
-      { id: "audio-lead", name: "Audio DSP Contributor", role: "Treasurer", votingWeight: 1 },
+      { id: "founder-eddymac", name: "Eddy Mac", role: "Board President", votingWeight: 1 },
+      { id: "artist-maccox", name: "Mac Cox", role: "Vice President", votingWeight: 1 },
+      { id: "audio-edmccox", name: "Ed McCox", role: "Treasurer", votingWeight: 1 },
     ],
   },
   {
-    companyName: "Monitaur Technologies Inc.",
+    companyName: "Vanguard Cybernetics Corp.",
     templateId: "c_corp_delaware",
     jurisdiction: "Delaware",
     foundingMembers: [
-      { id: "founder-josh", name: "Joshua Cox", role: "Chief Executive Officer", votingWeight: 1 },
-      { id: "edge-lead", name: "IoT Edge Engineering Lead", role: "VP of Engineering", votingWeight: 1 },
+      { id: "founder-jedmclaughlin", name: "J Ed McLaughlin", role: "Chief Executive Officer", votingWeight: 1 },
+      { id: "edge-edcox", name: "Ed Cox", role: "VP of Engineering", votingWeight: 1 },
     ],
   },
   {
-    companyName: "FitDjinn Health PBC",
+    companyName: "Sovereign BioVentures PBC",
     templateId: "benefit_corp",
     jurisdiction: "Delaware",
     foundingMembers: [
-      { id: "founder-josh", name: "Joshua Cox", role: "Founder & CEO", votingWeight: 1 },
-      { id: "clinical-advisor", name: "Medical & Metabolic Advisor", role: "Chief Medical Officer", votingWeight: 1 },
+      { id: "founder-joshed", name: "Josh Ed", role: "Founder & CEO", votingWeight: 1 },
+      { id: "clinical-eddylin", name: "Eddy Lin", role: "Chief Scientific Officer", votingWeight: 1 },
     ],
   },
   {
-    companyName: "Ironclad Grants Foundation",
+    companyName: "Prometheus Open Knowledge Foundation",
     templateId: "nonprofit_501c3_public",
     jurisdiction: "Delaware",
     foundingMembers: [
-      { id: "founder-josh", name: "Joshua Cox", role: "Executive Director", votingWeight: 1 },
-      { id: "compliance-cpa", name: "Uniform Guidance CPA", role: "Treasurer", votingWeight: 1 },
-      { id: "community-rep", name: "Community Trustee", role: "Secretary", votingWeight: 1 },
+      { id: "founder-coxedward", name: "Cox Edward", role: "Executive Director", votingWeight: 1 },
+      { id: "compliance-mccox", name: "Mc Cox", role: "Treasurer", votingWeight: 1 },
+      { id: "community-mced", name: "McEd", role: "Secretary", votingWeight: 1 },
     ],
   },
 ];

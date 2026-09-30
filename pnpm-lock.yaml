@@ -143,8 +143,8 @@ importers:
   apps/nextjs-legitblock:
     dependencies:
       '@billama/sdk':
-        specifier: link:../../../../billamajs
-        version: link:../../../../billamajs
+        specifier: link:../../../../sdk
+        version: link:../../../../sdk
       '@legitblock/legitblock-utils':
         specifier: workspace:*
         version: link:../../packages/legitblock-utils
