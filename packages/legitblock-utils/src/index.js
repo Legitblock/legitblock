@@ -116,3 +116,6 @@ export { createGitDriver, createGitStorageAdapter } from "./storage/git/forgeRou
 
 // Developer Tooling & Git Pre-Commit Hooks
 export { GitNotarizer } from "./cli/gitHook.js";
+
+// Ecosystem Corporate Charters
+export { ECOSYSTEM_VENTURES, foundEcosystemCompany } from "./ecosystem-charters.js";
