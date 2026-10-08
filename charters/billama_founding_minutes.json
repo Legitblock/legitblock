@@ -1,0 +1,154 @@
+{
+  "company": "Billama Inc.",
+  "timestamp": "2026-10-08T17:16:34.591Z",
+  "genesisBlockHash": "0e5bfb0d504bbf00b2c8ff39e6fc8f96fb4cc1aa02a7d88889505ad6f5f91e8e",
+  "chain": [
+    {
+      "index": 0,
+      "timestamp": "2026-10-08T17:16:34.591Z",
+      "previousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "type": "GENESIS",
+      "data": {
+        "message": "LegitBlock Genesis: Billama Inc. (c_corp)",
+        "organization": {
+          "id": "org-1791479794590",
+          "name": "Billama Inc.",
+          "type": "c_corp",
+          "jurisdiction": "Delaware",
+          "createdAt": "2026-10-08T17:16:34.590Z",
+          "governanceRules": {
+            "governingBody": "Board of Directors",
+            "votingMethod": "share-weighted",
+            "quorumPercentage": 50,
+            "approvalThreshold": 50,
+            "officerRoles": [
+              "Chief Executive Officer",
+              "President",
+              "Secretary",
+              "Chief Financial Officer",
+              "Treasurer"
+            ]
+          },
+          "foundingMembers": [
+            {
+              "id": "founder-admin",
+              "name": "Admin",
+              "role": "Chief Executive Officer & Director",
+              "votingWeight": 1,
+              "addedAt": "2026-10-08T17:16:34.590Z"
+            }
+          ]
+        },
+        "foundingMembers": [
+          {
+            "id": "founder-admin",
+            "name": "Admin",
+            "role": "Chief Executive Officer & Director",
+            "votingWeight": 1,
+            "addedAt": "2026-10-08T17:16:34.590Z"
+          }
+        ],
+        "initialDocumentsSummary": [
+          {
+            "id": "doc-c-corp-articles-of-incorporation",
+            "title": "Articles of Incorporation",
+            "category": "founding",
+            "version": "1.0",
+            "hash": "6f40989cce2c218a8fd6ff20cadd8d31ea88fd436f8f6863507d4cfe0242bab2"
+          },
+          {
+            "id": "doc-c-corp-bylaws",
+            "title": "Corporate Bylaws",
+            "category": "governance",
+            "version": "1.0",
+            "hash": "60e50357058aea39403017e05f60426060b3277ece20e2ae6929e62af7b7bc53"
+          },
+          {
+            "id": "doc-c-corp-initial-resolutions",
+            "title": "Initial Board Resolutions",
+            "category": "resolution",
+            "version": "1.0",
+            "hash": "0825d0764ed913634ea3a849d37c2c14cf0e59192f621b085e3a750ee33c95a6"
+          }
+        ]
+      },
+      "nonce": 1,
+      "validator": "genesis-founder",
+      "hash": "0e5bfb0d504bbf00b2c8ff39e6fc8f96fb4cc1aa02a7d88889505ad6f5f91e8e"
+    },
+    {
+      "index": 1,
+      "timestamp": "2026-10-08T17:16:34.591Z",
+      "previousHash": "0e5bfb0d504bbf00b2c8ff39e6fc8f96fb4cc1aa02a7d88889505ad6f5f91e8e",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-c-corp-articles-of-incorporation",
+        "title": "Articles of Incorporation",
+        "category": "founding",
+        "version": "1.0",
+        "content": "# Articles of Incorporation of the Corporation\n\n## Article I: Name\nThe name of the corporation shall be as designated in this blockchain ledger.\n\n## Article II: Purpose\nThe purpose of the corporation is to engage in any lawful act or activity for which corporations may be organized under the General Corporation Law.\n\n## Article III: Authorized Capital Stock\nThe total number of shares of stock which the corporation shall have authority to issue is 10,000,000 shares of Common Stock, par value $0.0001 per share.\n\n## Article IV: Board of Directors\nThe business and affairs of the corporation shall be managed by or under the direction of the Board of Directors. The initial Board shall be ratified upon genesis.\n\n## Article V: LegitBlock Protocol\nAll corporate records, minutes, stock ledgers, and amendments shall be cryptographically maintained and ratified on the LegitBlock blockchain.\n",
+        "contentHash": "6f40989cce2c218a8fd6ff20cadd8d31ea88fd436f8f6863507d4cfe0242bab2",
+        "effectiveDate": "2026-10-08T17:16:34.591Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 13,
+      "validator": "genesis-founder",
+      "hash": "0dce33408b1f059bc221bc3e7271fc00a8b1afe016141b2eb35718ddf16cb426"
+    },
+    {
+      "index": 2,
+      "timestamp": "2026-10-08T17:16:34.591Z",
+      "previousHash": "0dce33408b1f059bc221bc3e7271fc00a8b1afe016141b2eb35718ddf16cb426",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-c-corp-bylaws",
+        "title": "Corporate Bylaws",
+        "category": "governance",
+        "version": "1.0",
+        "content": "# Corporate Bylaws\n\n## Section 1: Stockholders Meetings\n1.1 Annual Meeting: Held annually at a time and date fixed by the Board of Directors.\n1.2 Notice: Notice shall be given not less than 10 nor more than 60 days before the meeting date.\n1.3 Quorum: A majority of the voting power of the shares entitled to vote shall constitute a quorum.\n\n## Section 2: Board of Directors\n2.1 Powers: The business and affairs of the Corporation shall be managed by its Board of Directors.\n2.2 Election and Term: Directors shall be elected at each annual meeting of stockholders.\n2.3 Action by Blockchain Vote: Any action required or permitted to be taken at any meeting of the Board may be taken by cryptographic vote on the LegitBlock ledger.\n\n## Section 3: Officers\n3.1 Executive Officers: The officers of the Corporation shall include a Chief Executive Officer, President, Secretary, and Chief Financial Officer.\n",
+        "contentHash": "60e50357058aea39403017e05f60426060b3277ece20e2ae6929e62af7b7bc53",
+        "effectiveDate": "2026-10-08T17:16:34.591Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 1,
+      "validator": "genesis-founder",
+      "hash": "0c8c9ea69678f0da9895a14441312a8cfcadd3d3f404d86a3eba6338e9adc8a6"
+    },
+    {
+      "index": 3,
+      "timestamp": "2026-10-08T17:16:34.591Z",
+      "previousHash": "0c8c9ea69678f0da9895a14441312a8cfcadd3d3f404d86a3eba6338e9adc8a6",
+      "type": "DOCUMENT_INSERT",
+      "data": {
+        "action": "INSERT",
+        "proposalId": "genesis-proposal",
+        "documentId": "doc-c-corp-initial-resolutions",
+        "title": "Initial Board Resolutions",
+        "category": "resolution",
+        "version": "1.0",
+        "content": "# Action by Unanimous Written Consent of the Initial Board of Directors\n\nThe undersigned, constituting all the directors of the Corporation, hereby adopt the following resolutions:\n\n1. Adoption of Bylaws: The Bylaws presented to the Board are hereby adopted as the Bylaws of this Corporation.\n2. Election of Officers: The founding executive officers are hereby elected to their designated roles.\n3. Adoption of LegitBlock: Resolved that the LegitBlock blockchain shall serve as the official, authoritative record of corporate governance and document ratifications.\n",
+        "contentHash": "0825d0764ed913634ea3a849d37c2c14cf0e59192f621b085e3a750ee33c95a6",
+        "effectiveDate": "2026-10-08T17:16:34.591Z",
+        "status": "active",
+        "notes": "Initial founding document ratified at genesis"
+      },
+      "nonce": 0,
+      "validator": "genesis-founder",
+      "hash": "025d825389421cfb1fe05ef94d003a91cb2aba0ae08cc1b24397fdb1e17c8703"
+    }
+  ],
+  "foundingMembers": [
+    {
+      "id": "founder-admin",
+      "name": "Admin",
+      "role": "Chief Executive Officer & Director",
+      "votingWeight": 1
+    }
+  ]
+}

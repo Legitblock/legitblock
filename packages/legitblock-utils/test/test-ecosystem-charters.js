@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { ECOSYSTEM_VENTURES, foundEcosystemCompany } from "../src/ecosystem-charters.js";
 
 console.log("=== Testing LegitBlock Ecosystem Company Formation ===");
-assert.strictEqual(ECOSYSTEM_VENTURES.length, 5);
+assert.strictEqual(ECOSYSTEM_VENTURES.length, 6);
 
 for (const venture of ECOSYSTEM_VENTURES) {
   const result = foundEcosystemCompany(venture);
@@ -16,4 +16,4 @@ for (const venture of ECOSYSTEM_VENTURES) {
   assert.ok(result.chain.isChainValid());
 }
 
-console.log("All 5 ecosystem corporate charters successfully sealed into Genesis blocks!");
+console.log("All 6 ecosystem corporate charters successfully sealed into Genesis blocks!");
