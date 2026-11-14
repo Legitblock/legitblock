@@ -60,17 +60,36 @@ export class WebAuthnPrfEngine {
       throw new Error("Invalid or unsupported encrypted packet format");
     }
 
+    if (!encryptedPacket.iv || !encryptedPacket.authTag || !encryptedPacket.ciphertext) {
+      throw new Error("Malformed encrypted packet: missing required fields");
+    }
+
     const iv = Buffer.from(encryptedPacket.iv, "hex");
+    if (iv.length !== 12) {
+      throw new Error("Invalid IV length: expected 12 bytes");
+    }
+
     const authTag = Buffer.from(encryptedPacket.authTag, "hex");
-    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+    if (authTag.length !== 16) {
+      throw new Error("Invalid Auth Tag length: expected 16 bytes");
+    }
+
+    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv, { authTagLength: 16 });
     decipher.setAuthTag(authTag);
 
     let plaintext = decipher.update(encryptedPacket.ciphertext, "hex", "utf-8");
     plaintext += decipher.final("utf-8");
 
-    // Verify hash integrity
-    if (encryptedPacket.digest && sha256(plaintext) !== encryptedPacket.digest) {
-      throw new Error("Integrity violation: decrypted document hash does not match declared digest");
+    // Verify hash integrity with timing-safe comparison
+    if (encryptedPacket.digest) {
+      const computedDigest = sha256(plaintext);
+      const expectedDigest = encryptedPacket.digest;
+      if (
+        computedDigest.length !== expectedDigest.length ||
+        !crypto.timingSafeEqual(Buffer.from(computedDigest, "utf-8"), Buffer.from(expectedDigest, "utf-8"))
+      ) {
+        throw new Error("Integrity violation: decrypted document hash does not match declared digest");
+      }
     }
 
     return plaintext;

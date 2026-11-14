@@ -26,7 +26,7 @@ import { getTemplateById } from "./templates/index.js";
 export const ECOSYSTEM_VENTURES = [
   {
     companyName: "Acme Quantum Dynamics Inc.",
-    templateId: "c_corp_delaware",
+    templateId: "c_corp",
     jurisdiction: "Delaware",
     foundingMembers: [
       { id: "founder-joshua", name: "Joshua Edward McLaughlin Cox", role: "Chief Executive Officer & Director", votingWeight: 1 },
@@ -45,7 +45,7 @@ export const ECOSYSTEM_VENTURES = [
   },
   {
     companyName: "Vanguard Cybernetics Corp.",
-    templateId: "c_corp_delaware",
+    templateId: "c_corp",
     jurisdiction: "Delaware",
     foundingMembers: [
       { id: "founder-jedmclaughlin", name: "J Ed McLaughlin", role: "Chief Executive Officer", votingWeight: 1 },
@@ -71,6 +71,14 @@ export const ECOSYSTEM_VENTURES = [
       { id: "community-mced", name: "McEd", role: "Secretary", votingWeight: 1 },
     ],
   },
+  {
+    companyName: "Billama Inc.",
+    templateId: "c_corp",
+    jurisdiction: "Delaware",
+    foundingMembers: [
+      { id: "founder-admin", name: "Admin", role: "Chief Executive Officer & Director", votingWeight: 1 }
+    ],
+  },
 ];
 
 /**
@@ -78,7 +86,7 @@ export const ECOSYSTEM_VENTURES = [
  * @param {CompanyCharterConfig} venture
  */
 export function foundEcosystemCompany(venture) {
-  const tpl = getTemplateById(venture.templateId) || getTemplateById("c_corp_delaware");
+  const tpl = getTemplateById(venture.templateId) || getTemplateById("c_corp");
   const chain = new Blockchain({ difficulty: 1 });
 
   const genesisBlock = chain.initializeGenesis({

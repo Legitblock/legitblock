@@ -19,10 +19,11 @@ export function openEditor(initialContent = "", filenameHint = "document.md") {
   fs.writeFileSync(tempFile, initialContent, "utf8");
 
   try {
-    // Open editor synchronously and inherit stdin/stdout/stderr
-    const result = spawnSync(editor, [tempFile], {
+    // Parse editor command and arguments safely without invoking a shell
+    const [editorBin, ...editorArgs] = editor.trim().split(/\s+/);
+    const result = spawnSync(editorBin, [...editorArgs, tempFile], {
       stdio: "inherit",
-      shell: true
+      shell: false
     });
 
     if (result.error) {
